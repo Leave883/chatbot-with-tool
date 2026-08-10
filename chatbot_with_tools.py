@@ -46,16 +46,6 @@ def get_weather(city):
     # json.dumps 把python字典转成 JSON 字符串，因为要返回给模型。ensure_ascii=False 让中文正常显示
     return json.dumps(data, ensure_ascii=False)
 
-async function get_page_content(args) {
-  const res = await fetch(args.url);
-  const html = await res.text();
-  // 解析 HTML ，去除非内容部分的无关标签
-  // 避免无用信息占满上下文窗口
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  doc.querySelectorAll('script,style,nav,header,footer,iframe,noscript').forEach(el => el.remove());
-  const text = doc.body?.innerText || '';
-  return text.slice(0, 5000);
-}
 
 # 工具名到函数的映射，因为模型只会返回请求调用，python程序需要自己找到get_weather函数
 tool_functions = {"get_weather": get_weather}
